@@ -1,25 +1,36 @@
+// src/pages/Collectives.tsx
 import React from 'react';
 import { Users, MessageSquare, Star } from 'lucide-react';
 import { useProject } from '../contexts/ProjectContext';
+import { Link } from 'react-router-dom';
 
 const collectives = [
   {
+    id: 1,
     name: "Sound Designers United",
     members: 128,
     activeProjects: 5,
     description: "A collective of sound designers and musicians collaborating on various audio projects.",
+    logo: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80",
+    color: "147, 51, 234" // Purple
   },
   {
+    id: 2,
     name: "Visual Storytellers",
     members: 94,
     activeProjects: 3,
     description: "Artists and writers working together to create compelling visual narratives.",
+    logo: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80",
+    color: "59, 130, 246" // Blue
   },
   {
+    id: 3,
     name: "Digital Art Pioneers",
     members: 156,
     activeProjects: 7,
     description: "Pushing the boundaries of digital art through collaborative experimentation.",
+    logo: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80",
+    color: "236, 72, 153" // Pink
   }
 ];
 
@@ -34,9 +45,10 @@ export function Collectives() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {collectives.map((collective, index) => (
-          <div
-            key={index}
+        {collectives.map((collective) => (
+          <Link
+            key={collective.id}
+            to={`/collectives/${collective.id}`}
             className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 transition-all duration-700 hover:border-opacity-50"
             style={{
               borderColor: activeColor ? `rgba(${activeColor}, 0.2)` : undefined,
@@ -60,7 +72,7 @@ export function Collectives() {
                 <span>{collective.activeProjects} active projects</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

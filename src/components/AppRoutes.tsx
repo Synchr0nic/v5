@@ -8,6 +8,7 @@ import { Notifications } from '../pages/Notifications';
 import { Profile } from '../pages/Profile';
 import { Project } from '../pages/Project';
 import { NewProject } from '../pages/NewProject';
+import { Collective } from '../pages/Collective'; // Import the Collective component
 
 export function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ export function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/collectives" element={<Collectives />} />
+      <Route path="/collectives/:id" element={<Collective />} /> {/* Add this route */}
       <Route path="/messages" element={<Messages />} />
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/profile" element={<Profile />} />
