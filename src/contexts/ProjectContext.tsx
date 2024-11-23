@@ -18,11 +18,11 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ProjectContext.Provider 
-      value={{ 
-        activeProject, 
-        activeColor, 
-        setActiveProject: handleSetActiveProject 
+    <ProjectContext.Provider
+      value={{
+        activeProject,
+        activeColor,
+        setActiveProject: handleSetActiveProject
       }}
     >
       {children}
@@ -66,5 +66,14 @@ export const featuredProjects = [
     collaborators: 5,
     tags: ["Writing", "Illustration"],
     color: "236, 72, 153" // Pink
+  },
+  {
+    id: 4,
+    title: "PHOTOGRAPHY MOUNTAINS",
+    description: "A photography project capturing the beauty of mountains.",
+    image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80",
+    collaborators: 7,
+    tags: ["Photography", "Nature"],
+    color: "34, 197, 94" // Green
   }
 ];
