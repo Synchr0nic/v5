@@ -1,3 +1,4 @@
+// src/contexts/ProjectContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 
 interface ProjectContextType {
@@ -47,7 +48,13 @@ export const featuredProjects = [
     collaborators: 8,
     tags: ["Music", "Art"],
     color: "147, 51, 234", // Purple
-    audioUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3"
+    audioUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    milestones: [
+      { name: "Concept Development", completed: true },
+      { name: "Sound Design", completed: false },
+      { name: "Mixing", completed: false },
+      { name: "Mastering", completed: false }
+    ]
   },
   {
     id: 2,
@@ -56,7 +63,13 @@ export const featuredProjects = [
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80",
     collaborators: 12,
     tags: ["3D", "Animation"],
-    color: "59, 130, 246" // Blue
+    color: "59, 130, 246", // Blue
+    milestones: [
+      { name: "Storyboarding", completed: true },
+      { name: "Illustration", completed: true },
+      { name: "Animation", completed: true },
+      { name: "Post-Production", completed: true }
+    ]
   },
   {
     id: 3,
@@ -65,7 +78,13 @@ export const featuredProjects = [
     image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80",
     collaborators: 5,
     tags: ["Writing", "Illustration"],
-    color: "236, 72, 153" // Pink
+    color: "236, 72, 153", // Pink
+    milestones: [
+      { name: "Concept Development", completed: true },
+      { name: "Writing", completed: false },
+      { name: "Illustration", completed: false },
+      { name: "Publishing", completed: false }
+    ]
   },
   {
     id: 4,
@@ -74,6 +93,12 @@ export const featuredProjects = [
     image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&q=80",
     collaborators: 7,
     tags: ["Photography", "Nature"],
-    color: "34, 197, 94" // Green
+    color: "34, 197, 94", // Green
+    milestones: [
+      { name: "Location Scouting", completed: true },
+      { name: "Photography", completed: false },
+      { name: "Editing", completed: false },
+      { name: "Publishing", completed: false }
+    ]
   }
 ];

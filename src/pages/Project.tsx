@@ -1,3 +1,4 @@
+// src/pages/Project.tsx
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Users, MessageSquare, Calendar, Link as LinkIcon, Settings, Music2, Paintbrush, BookOpen, Video } from 'lucide-react';
@@ -28,6 +29,11 @@ export function Project() {
     { id: 'audio' as SubTab, label: 'Audio', icon: Music2 },
     { id: 'story' as SubTab, label: 'Story', icon: BookOpen },
   ];
+
+  const calculateProgress = (milestones) => {
+    const completed = milestones.filter(milestone => milestone.completed).length;
+    return (completed / milestones.length) * 100;
+  };
 
   return (
     <div className="space-y-8">
@@ -62,7 +68,10 @@ export function Project() {
                 ? activeColor
                   ? `rgba(${activeColor}, 0.1)`
                   : 'rgba(255, 255, 255, 0.05)'
-                : 'transparent'
+                : 'transparent',
+              boxShadow: activeTab === id && activeColor
+                ? `0 0 20px rgba(${activeColor}, 0.1)`
+                : 'none'
             }}
           >
             <Icon className="h-5 w-5" />
@@ -85,7 +94,10 @@ export function Project() {
                   ? activeColor
                     ? `rgba(${activeColor}, 0.1)`
                     : 'rgba(255, 255, 255, 0.05)'
-                  : 'transparent'
+                  : 'transparent',
+                boxShadow: activeSubTab === id && activeColor
+                  ? `0 0 20px rgba(${activeColor}, 0.1)`
+                  : 'none'
               }}
             >
               <Icon className="h-5 w-5" />
@@ -106,7 +118,24 @@ export function Project() {
                 }}
               >
                 <h2 className="text-xl font-light mb-4">Project Overview</h2>
-                <p className="text-zinc-400">This is the overview of the project. You can add more details here.</p>
+                <div className="flex flex-col space-y-2">
+                  {project.milestones.map((milestone, idx) => (
+                    <div key={idx} className="flex items-center justify-between">
+                      <span className={`text-sm ${milestone.completed ? 'text-green-500' : 'text-zinc-400'}`}>
+                        {milestone.name}
+                      </span>
+                      <span className={`text-sm ${milestone.completed ? 'text-green-500' : 'text-zinc-400'}`}>
+                        {milestone.completed ? 'Completed' : 'In Progress'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="w-full bg-zinc-700 rounded-full h-2.5 mt-4">
+                  <div
+                    className="bg-green-500 h-2.5 rounded-full"
+                    style={{ width: `${calculateProgress(project.milestones)}%` }}
+                  ></div>
+                </div>
               </div>
             </div>
           )}

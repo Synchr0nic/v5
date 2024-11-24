@@ -9,14 +9,26 @@ const projects = [
     role: "Sound Designer",
     status: "In Progress",
     collaborators: 4,
-    image: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&q=80",
+    milestones: [
+      { name: "Concept Development", completed: true },
+      { name: "Sound Design", completed: false },
+      { name: "Mixing", completed: false },
+      { name: "Mastering", completed: false }
+    ]
   },
   {
     title: "Urban Stories",
     role: "Project Lead",
     status: "Completed",
     collaborators: 6,
-    image: "https://images.unsplash.com/photo-1515462250-33bd709cbe85?auto=format&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1515462250-33bd709cbe85?auto=format&fit=crop&q=80",
+    milestones: [
+      { name: "Storyboarding", completed: true },
+      { name: "Illustration", completed: true },
+      { name: "Animation", completed: true },
+      { name: "Post-Production", completed: true }
+    ]
   }
 ];
 
@@ -44,6 +56,11 @@ export function Profile() {
     { id: 'achievements', label: 'Achievements' },
     { id: 'score', label: 'Creator Score' }
   ];
+
+  const calculateProgress = (milestones) => {
+    const completed = milestones.filter(milestone => milestone.completed).length;
+    return (completed / milestones.length) * 100;
+  };
 
   return (
     <div className="space-y-8">
@@ -128,52 +145,52 @@ export function Profile() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {activeTab === 'overview' && (
             <>
-              <div
-                className="bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-800 transition-all duration-700 hover:border-opacity-50 group"
-                style={{
-                  borderColor: activeColor ? `rgba(${activeColor}, 0.2)` : ''
-                }}
-              >
-                <div className="relative">
-                  <img
-                    src={projects[0].image}
-                    alt={projects[0].title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="text-xl font-light mb-1">{projects[0].title}</h3>
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-zinc-300">{projects[0].role}</span>
-                      <span className="text-zinc-400">•</span>
-                      <span className="text-zinc-400">{projects[0].collaborators} collaborators</span>
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-800 transition-all duration-700 hover:border-opacity-50 group"
+                  style={{
+                    borderColor: activeColor ? `rgba(${activeColor}, 0.2)` : ''
+                  }}
+                >
+                  <div className="relative">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4">
+                      <h3 className="text-xl font-light mb-1">{project.title}</h3>
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="text-zinc-300">{project.role}</span>
+                        <span className="text-zinc-400">•</span>
+                        <span className="text-zinc-400">{project.collaborators} collaborators</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 space-y-4">
+                    <div className="flex flex-col space-y-2">
+                      {project.milestones.map((milestone, idx) => (
+                        <div key={idx} className="flex items-center justify-between">
+                          <span className={`text-sm ${milestone.completed ? 'text-green-500' : 'text-zinc-400'}`}>
+                            {milestone.name}
+                          </span>
+                          <span className={`text-sm ${milestone.completed ? 'text-green-500' : 'text-zinc-400'}`}>
+                            {milestone.completed ? 'Completed' : 'In Progress'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="w-full bg-zinc-700 rounded-full h-2.5">
+                      <div
+                        className="bg-green-500 h-2.5 rounded-full"
+                        style={{ width: `${calculateProgress(project.milestones)}%` }}
+                      ></div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-800 transition-all duration-700 hover:border-opacity-50 group"
-                style={{
-                  borderColor: activeColor ? `rgba(${activeColor}, 0.2)` : ''
-                }}
-              >
-                <div className="relative">
-                  <img
-                    src={projects[1].image}
-                    alt={projects[1].title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="text-xl font-light mb-1">{projects[1].title}</h3>
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-zinc-300">{projects[1].role}</span>
-                      <span className="text-zinc-400">•</span>
-                      <span className="text-zinc-400">{projects[1].collaborators} collaborators</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </>
           )}
 
