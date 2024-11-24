@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 interface ProjectContextType {
   activeProject: number | null;
   activeColor: string;
+  activeFont: string;
   setActiveProject: (index: number | null) => void;
 }
 
@@ -12,10 +13,12 @@ const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 export function ProjectProvider({ children }: { children: React.ReactNode }) {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [activeColor, setActiveColor] = useState('');
+  const [activeFont, setActiveFont] = useState('font-sans');
 
   const handleSetActiveProject = (index: number | null) => {
     setActiveProject(index);
     setActiveColor(index !== null ? featuredProjects[index]?.color : '');
+    setActiveFont(index !== null ? featuredProjects[index]?.font : 'font-sans');
   };
 
   return (
@@ -23,6 +26,7 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
       value={{
         activeProject,
         activeColor,
+        activeFont,
         setActiveProject: handleSetActiveProject
       }}
     >
@@ -49,6 +53,7 @@ export const featuredProjects = [
     tags: ["Music", "Art"],
     color: "147, 51, 234", // Purple
     audioUrl: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+    font: "font-serif", // Example font for ethereal or artistic projects
     milestones: [
       { name: "Concept Development", completed: true },
       { name: "Sound Design", completed: false },
@@ -64,6 +69,7 @@ export const featuredProjects = [
     collaborators: 12,
     tags: ["3D", "Animation"],
     color: "59, 130, 246", // Blue
+    font: "font-techno", // Example font for futuristic themes
     milestones: [
       { name: "Storyboarding", completed: true },
       { name: "Illustration", completed: true },
@@ -79,6 +85,7 @@ export const featuredProjects = [
     collaborators: 5,
     tags: ["Writing", "Illustration"],
     color: "236, 72, 153", // Pink
+    font: "font-serif", // Classic font for storytelling
     milestones: [
       { name: "Concept Development", completed: true },
       { name: "Writing", completed: false },
@@ -94,6 +101,7 @@ export const featuredProjects = [
     collaborators: 7,
     tags: ["Photography", "Nature"],
     color: "34, 197, 94", // Green
+    font: "font-graffiti", // Example for bold and rugged styles
     milestones: [
       { name: "Location Scouting", completed: true },
       { name: "Photography", completed: false },
