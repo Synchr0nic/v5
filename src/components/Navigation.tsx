@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Palette, Search } from 'lucide-react';
+import { Infinity, Search } from 'lucide-react';
 import { useProject } from '../contexts/ProjectContext';
 
 export function Navigation() {
   const { activeColor } = useProject();
 
   return (
-    <nav 
+    <nav
       className="bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-800 sticky top-0 z-50 transition-colors duration-700 rounded-b-lg"
       style={{
         borderColor: activeColor ? `rgba(${activeColor}, 0.2)` : '',
@@ -16,7 +16,7 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <Link to="/" className="flex items-center space-x-2">
-          <Palette className="h-8 w-8 text-white" />
+          <Infinity className="h-8 w-8 text-white" />
           <span className="text-2xl font-light tracking-wider text-white">
             SYNCREOS
           </span>
